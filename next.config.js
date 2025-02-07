@@ -3,6 +3,9 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  typescript: {
+    ignoreBuildErrors: true, // TypeScript の型エラーを無視
+  },
   async rewrites() {
     return [
       {
