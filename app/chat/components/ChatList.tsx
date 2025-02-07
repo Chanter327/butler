@@ -47,7 +47,6 @@ export default function ChatList({ type, onSelectChat }: ChatListProps) {
               chatId: chat.chatId,
               type: chat.type,
               chatName: chat.chatName,
-              lastMessage: chat.lastMessage || "メッセージはありません",
               avatar: chat.avatar || "/default-avatar.png",
             }))
           setChats(validChats)
