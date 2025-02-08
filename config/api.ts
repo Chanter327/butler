@@ -7,5 +7,7 @@ export const API_ROUTES = {
   GET_CHATS: `${API_BASE_URL}/api/chats`,
   GET_MESSAGES: `${API_BASE_URL}/api/messages`,
   SEND_MESSAGE: `${API_BASE_URL}/api/messages`,
+  EDIT_MESSAGE: `${API_BASE_URL}/api/messages`,
+  DELETE_MESSAGE: `${API_BASE_URL}/api/messages?messageId=:messageId`,
 }
 
