@@ -54,7 +54,6 @@ export default function SummariesPage() {
 
   const parseJsonFromString = (text: string) => {
     try {
-      // 文字列からJSONを抽出するための正規表現
       const jsonMatch = text.match(/```json\s*({[\s\S]*?})\s*```/)
       if (!jsonMatch) return { title: "", summary: "" }
 
@@ -93,33 +92,37 @@ export default function SummariesPage() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-6">要約一覧</h1>
-      {summaries.length === 0 ? (
-        <p className="text-center text-gray-500">要約はまだありません。</p>
-      ) : (
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {summaries.map((summary) => {
-            const { title, summary: parsedSummary } = parseJsonFromString(summary.summary)
-            return (
-              <Card key={summary.summaryId}>
-                <CardHeader>
-                  <CardTitle className="text-lg">{title || "無題"}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="mb-2 text-sm text-gray-500">作成日時: {new Date(summary.timestamp).toLocaleString()}</p>
-                  <p className="text-sm whitespace-pre-line">{truncateSummary(parsedSummary)}</p>
-                </CardContent>
-                <CardFooter>
-                  <Link href={`/summary/${summary.summaryId}`} passHref>
-                    <Button>詳細を見る</Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-            )
-          })}
-        </div>
-      )}
+    <div className="flex flex-col h-full overflow-hidden">
+      <h1 className="text-3xl font-bold p-4">要約一覧</h1>
+      <div className="flex-grow overflow-y-auto p-4">
+        {summaries.length === 0 ? (
+          <p className="text-center text-gray-500">要約はまだありません。</p>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {summaries.map((summary) => {
+              const { title, summary: parsedSummary } = parseJsonFromString(summary.summary)
+              return (
+                <Card key={summary.summaryId} className="flex flex-col">
+                  <CardHeader>
+                    <CardTitle className="text-lg">{title || "無題"}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="mb-2 text-sm text-gray-500">
+                      作成日時: {new Date(summary.timestamp).toLocaleString()}
+                    </p>
+                    <p className="text-sm whitespace-pre-line">{truncateSummary(parsedSummary)}</p>
+                  </CardContent>
+                  <CardFooter>
+                    <Link href={`/summary/${summary.summaryId}`} passHref>
+                      <Button className="w-full">詳細を見る</Button>
+                    </Link>
+                  </CardFooter>
+                </Card>
+              )
+            })}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

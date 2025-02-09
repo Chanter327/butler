@@ -1,5 +1,5 @@
-export const API_BASE_URL = "https://butler-backend-142058868140.asia-northeast1.run.app"
-// export const API_BASE_URL = "http://localhost:8080"
+// export const API_BASE_URL = "https://butler-backend-142058868140.asia-northeast1.run.app"
+export const API_BASE_URL = "http://localhost:8080"
 
 export const API_ROUTES = {
   SIGNUP: `${API_BASE_URL}/api/signup`,
