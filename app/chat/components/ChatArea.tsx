@@ -97,9 +97,17 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
     fetchMessages()
   }, [fetchMessages])
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+  const scrollToBottom = useCallback(() => {
+    if (messagesEndRef.current) {
+      setTimeout(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+      }, 100)
+    }
+  }, [])
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages, scrollToBottom])
 
   const handleSendMessage = async () => {
     if (newMessage.trim()) {
