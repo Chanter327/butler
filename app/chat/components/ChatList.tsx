@@ -69,7 +69,8 @@ export default function ChatList({ type, onSelectChat }: ChatListProps) {
   }, [fetchChats])
 
   return (
-    <div className="w-1/3 border-r overflow-y-auto">
+    <div className="w-[100vw] border-r h-full overflow-hidden flex flex-col sm:w-1/3">
+      <div className="flex-1 overflow-y-auto">
       {chats.length > 0 ? (
         <ul className="space-y-2 p-4">
           {chats.map((chat) => (
@@ -92,6 +93,7 @@ export default function ChatList({ type, onSelectChat }: ChatListProps) {
       ) : (
         <p className="p-4 text-center text-gray-500">チャットはありません</p>
       )}
+      </div>
     </div>
   )
 }

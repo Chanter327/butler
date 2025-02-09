@@ -48,6 +48,10 @@ export default function AuthForm({ isSignIn }: AuthFormProps) {
         if (data.uid) {
           localStorage.setItem("uid", data.uid)
         }
+        if (data.userName) {
+          localStorage.setItem("userName", data.userName)
+          window.dispatchEvent(new CustomEvent('userNameUpdated', { detail: data.userName }))
+        }
         router.push("/dashboard")
       } else {
         throw new Error(data.message || "エラーが発生しました")

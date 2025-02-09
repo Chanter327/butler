@@ -12,7 +12,7 @@ import { API_ROUTES } from "@/config/api"
 import { useSelect } from "@/hooks/select"
 
 type Participant = {
-  uid: string
+  email: string
 }
 
 export default function NewChatPage() {
@@ -37,7 +37,7 @@ export default function NewChatPage() {
 
   const handleAddParticipant = () => {
     if (newParticipant.trim() !== "") {
-      setParticipants([...participants, { uid: newParticipant.trim() }])
+      setParticipants([...participants, { email: newParticipant.trim() }])
       setNewParticipant("")
     }
   }
@@ -61,10 +61,21 @@ export default function NewChatPage() {
       return
     }
 
+    if (chatType === "group" && !chatName.trim()) {
+      toast({
+        title: "エラー",
+        description: "グループチャットの場合は、チャット名を入力してください。",
+        variant: "destructive",
+      })
+      setIsLoading(false)
+      return
+    }
+
     const payload = {
       type: chatType,
-      chatName: chatName,
-      participants: [{ uid }, ...participants],
+      chatName: chatType === "group" ? chatName : undefined,
+      participantsEmails: participants,
+      chatCreatorId: uid,
     }
 
     try {
@@ -102,10 +113,6 @@ export default function NewChatPage() {
       <h1 className="text-3xl font-bold mb-6">新規チャット作成</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <Label htmlFor="chatName">チャット名</Label>
-          <Input id="chatName" type="text" value={chatName} onChange={(e) => setChatName(e.target.value)} required />
-        </div>
-        <div>
           <Label htmlFor="chatType">チャットタイプ</Label>
           <Select value={chatType} onValueChange={setChatType}>
             <SelectTrigger>
@@ -118,14 +125,31 @@ export default function NewChatPage() {
           </Select>
         </div>
         <div>
+          <Label htmlFor="chatName">チャット名 (グループチャットのみ)</Label>
+          <Input
+            id="chatName"
+            type="text"
+            value={chatName}
+            onChange={(e) => setChatName(e.target.value)}
+            disabled={chatType === "dm"}
+            required={chatType === "group"}
+            placeholder={
+              chatType === "dm" ? "ダイレクトメッセージではチャット名を設定できません" : "チャット名を入力（必須）"
+            }
+          />
+          {chatType === "group" && (
+            <p className="text-sm text-gray-500 mt-1">グループチャットの場合は、チャット名の入力が必須です。</p>
+          )}
+        </div>
+        <div>
           <Label htmlFor="participants">参加者</Label>
           <div className="flex space-x-2">
             <Input
               id="participants"
-              type="text"
+              type="email"
               value={newParticipant}
               onChange={(e) => setNewParticipant(e.target.value)}
-              placeholder="参加者のUIDを入力"
+              placeholder="参加者のメールアドレスを入力"
             />
             <Button type="button" onClick={handleAddParticipant}>
               追加
@@ -134,7 +158,7 @@ export default function NewChatPage() {
           <ul className="mt-2 space-y-2">
             {participants.map((participant, index) => (
               <li key={index} className="flex justify-between items-center bg-gray-100 p-2 rounded">
-                <span>{participant.uid}</span>
+                <span>{participant.email}</span>
                 <Button type="button" variant="destructive" size="sm" onClick={() => handleRemoveParticipant(index)}>
                   削除
                 </Button>

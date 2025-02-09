@@ -23,7 +23,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        {/* <Card>
           <CardHeader>
             <CardTitle>タスク</CardTitle>
           </CardHeader>
@@ -33,7 +33,7 @@ export default function DashboardPage() {
               <Button className="w-full mt-4">すべてのタスクを見る</Button>
             </Link>
           </CardContent>
-        </Card>
+        </Card> */}
 
         <Card>
           <CardHeader>
@@ -41,7 +41,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <RecentSummaries />
-            <Link href="/insights">
+            <Link href="/summary">
               <Button className="w-full mt-4">すべての要約を見る</Button>
             </Link>
           </CardContent>
