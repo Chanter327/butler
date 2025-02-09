@@ -301,6 +301,24 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
     return <div className="flex-grow flex items-center justify-center">Loading messages...</div>
   }
 
+  useEffect(() => {
+    const shouldCreateInitialMessage = !isLoading && messages.length === 0;
+    if (shouldCreateInitialMessage) {
+      const uid = localStorage.getItem("uid")
+      const userName = localStorage.getItem("userName") || "Unknown User"
+      
+      const initialMessage: Message = {
+        messageId: Date.now().toString(),
+        senderId: uid || "",
+        senderName: userName,
+        content: "チャットルームが作成されました",
+        timestamp: new Date().toISOString(),
+      }
+      
+      setMessages([initialMessage])
+    }
+  }, [isLoading, messages.length])
+
   return (
     <div className="flex flex-col h-full">
       <div className="p-4 border-b md:hidden">
