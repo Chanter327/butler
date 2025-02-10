@@ -308,10 +308,10 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
       const userName = localStorage.getItem("userName") || "Unknown User"
       
       const initialMessage: Message = {
-        messageId: Date.now().toString(),
+        messageId: "dump",
         senderId: uid || "",
         senderName: userName,
-        content: "チャットルームが作成されました",
+        content: "",
         timestamp: new Date().toISOString(),
       }
       
@@ -339,7 +339,7 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
         {messages.map((message) => {
           const isOwnMessage = message.senderId === localStorage.getItem("uid")
           return (
-            <div key={message.messageId} className={`mb-4 w-[100%] group relative`}>
+            <div key={message.messageId} className={`mb-4 w-[100%] group relative ${message.messageId === "dump" ? "hidden" : ""}`}>
               {isSummaryMode && (
                 <Checkbox
                   checked={selectedMessages.includes(message.messageId)}
