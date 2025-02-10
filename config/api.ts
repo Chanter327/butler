@@ -6,6 +6,7 @@ export const API_ROUTES = {
   SIGNIN: `${API_BASE_URL}/api/signin`,
   CREATE_CHAT: `${API_BASE_URL}/api/chats`,
   GET_CHATS: `${API_BASE_URL}/api/chats`,
+  GET_RECENT_CHATS: `${API_BASE_URL}/api/chats/recent`,
   GET_MESSAGES: `${API_BASE_URL}/api/messages`,
   SEND_MESSAGE: `${API_BASE_URL}/api/messages`,
   EDIT_MESSAGE: `${API_BASE_URL}/api/messages`,
@@ -13,5 +14,6 @@ export const API_ROUTES = {
   CREATE_SUMMARY: `${API_BASE_URL}/api/summary`,
   GET_SUMMARIES: `${API_BASE_URL}/api/summary`,
   GET_SUMMARY: `${API_BASE_URL}/api/summary/details`,
+  GET_RECENT_SUMMARIES: `${API_BASE_URL}/api/summary/recent`,
 }
 

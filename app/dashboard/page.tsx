@@ -18,7 +18,7 @@ export default function DashboardPage() {
           <CardContent>
             <RecentChats />
             <Link href="/chat">
-              <Button className="w-full mt-4">すべてのチャットを見る</Button>
+              <Button className="w-full mt-4">チャットページへ</Button>
             </Link>
           </CardContent>
         </Card>
@@ -42,7 +42,7 @@ export default function DashboardPage() {
           <CardContent>
             <RecentSummaries />
             <Link href="/summary">
-              <Button className="w-full mt-4">すべての要約を見る</Button>
+              <Button className="w-full mt-4">要約ページへ</Button>
             </Link>
           </CardContent>
         </Card>

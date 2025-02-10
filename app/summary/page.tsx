@@ -94,7 +94,7 @@ export default function SummariesPage() {
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <h1 className="text-3xl font-bold p-4">要約一覧</h1>
-      <div className="flex-grow overflow-y-auto p-4">
+      <div className="flex-grow overflow-y-auto p-4 pb-8">
         {summaries.length === 0 ? (
           <p className="text-center text-gray-500">要約はまだありません。</p>
         ) : (

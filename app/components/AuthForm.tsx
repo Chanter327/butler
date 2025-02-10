@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { toast } from "@/hooks/use-toast"
+import { useToast } from "@/hooks/use-toast"
 import { API_ROUTES } from "@/config/api"
 
 interface AuthFormProps {
@@ -14,6 +14,7 @@ interface AuthFormProps {
 }
 
 export default function AuthForm({ isSignIn }: AuthFormProps) {
+  const { toast } = useToast()
   const [userName, setUserName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")

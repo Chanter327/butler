@@ -320,7 +320,7 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
   }, [isLoading, messages.length])
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full z-10">
       <div className="p-4 border-b md:hidden">
       <Button 
         onClick={() => {
@@ -335,7 +335,7 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
           チャット一覧
       </Button>
       </div>
-      <div className="flex-grow overflow-y-scroll h-5 w-[100%] p-5 space-y-4 sm:w-[70vw]">
+      <div className="flex-grow overflow-y-scroll h-5 w-[100%] pb-5 pr-5 pl-5 pt-10 space-y-4 sm:w-[70vw]">
         {messages.map((message) => {
           const isOwnMessage = message.senderId === localStorage.getItem("uid")
           return (
@@ -348,7 +348,7 @@ export default function ChatArea({ chatId }: ChatAreaProps) {
                 />
               )}
               {isOwnMessage && !message.pending && (
-                <div className="absolute right-0 top-0 transform -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity flex space-x-2 bg-white p-1 rounded shadow-md">
+                <div className="absolute right-0 top-0 transform -translate-y-full opacity-0 group-hover:opacity-100 transition-opacity flex space-x-2 bg-white p-1 rounded shadow-md z-10">
                   <Button
                     variant="ghost"
                     size="icon"
